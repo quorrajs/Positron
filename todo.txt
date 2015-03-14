@@ -1,0 +1,8 @@
+URL class
+Redirector class
+Sub-Domain Routing
+Named Routes
+Route Model Binding
+Resource route missing method
+Input
+Enable HTTP Method Override

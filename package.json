@@ -1,0 +1,24 @@
+{
+  "name": "positron",
+  "version": "0.0.1-alpha",
+  "scripts": {},
+  "dependencies": {
+    "accepts": "1.0.1",
+    "async": "~0.9.0",
+    "buffer-crc32": "0.2.1",
+    "cookie": "0.1.2",
+    "cookie-signature": "1.0.3",
+    "escape-html": "1.0.1",
+    "fresh": "0.2.2",
+    "lodash": "^3.1.0",
+    "longjohn": "^0.2.4",
+    "methods": "^1.1.0",
+    "parseurl": "1.0.1",
+    "range-parser": "1.0.0",
+    "reflection-js": "^0.1.6",
+    "send": "0.3.0",
+    "type-is": "1.1.0",
+    "utils-merge": "1.0.0",
+    "xregexp": "git://github.com/slevithan/xregexp.git"
+  }
+}
