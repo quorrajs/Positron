@@ -1,27 +1,9 @@
-Routing things remaining
-------------------------
 URL class
 Redirector class
 Sub-Domain Routing
 Named Routes
 Route Model Binding
 Resource route missing method
-Input - body parser
+Input
 Enable HTTP Method Override
-Manage response for HEAD, OPTIONS, etc method in router and error handler
-
-
-Things to implement
--------------------
-Model - ORM
-Session - Cookie
-views
-Logging
-Localization
-Mails
-Queues
-Security
-SSH
-Cli
-Task runner integration
-Encryption and hashing
+Manage response for HEAD, OPTIONS method in router and error handler
