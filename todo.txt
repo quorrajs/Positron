@@ -10,10 +10,6 @@ Input - body parser
 Enable HTTP Method Override
 Manage response for HEAD, OPTIONS, etc method in router and error handler
 
-Views
------
-serve static files
-
 
 Things to implement
 -------------------
