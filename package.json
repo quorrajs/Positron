@@ -28,6 +28,7 @@
     "stack-trace": "0.0.9",
     "type-is": "1.1.0",
     "utils-merge": "1.0.0",
+    "winston": "^0.9.0",
     "xregexp": "git://github.com/slevithan/xregexp.git"
   }
 }
