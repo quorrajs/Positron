@@ -20,6 +20,7 @@
     "on-finished": "^2.2.0",
     "ouch": "^0.2.0-beta",
     "parseurl": "1.0.1",
+    "qs": "^2.4.1",
     "range-parser": "1.0.0",
     "reflection-js": "^0.1.6",
     "send": "^0.12.2",
