@@ -13,9 +13,6 @@ Input - body parser -> consider using skipper instead of body-parser
 
 Things to implement
 -------------------
-Model - ORM
-Session - Cookie
-Logging
 Localization
 Mails
 Queues
@@ -24,3 +21,28 @@ SSH
 Cli
 Task runner integration
 Encryption and hashing
+
+Consider
+------------------
+Model - ORM - port eloquent
+Add basic filters  in quorra
+filters not disabled in testing env?
+environment detection -> use environment provided in the console if any
+
+NB
+--
+Remove unnecessary dev dep from positron and quarra
+Move possible dep from quorra to positron
+
+
+
+next version
+-----------------------------------------------
+===============================================
+routing
+-------
+route match event
+route finish event
+filter classes
+
+
