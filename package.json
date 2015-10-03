@@ -36,5 +36,9 @@
     "waterline": "^0.10.19",
     "winston": "^0.9.0",
     "xregexp": "git://github.com/slevithan/xregexp.git"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.1",
+    "should": "^7.1.0"
   }
 }
