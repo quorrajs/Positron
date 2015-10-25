@@ -1,9 +1,6 @@
 Routing things remaining
 ------------------------
-URL class
-Redirector class
 Sub-Domain Routing
-Named Routes
 Route Model Binding
 Resource route missing method
 Enable HTTP Method Override
@@ -28,11 +25,13 @@ Model - ORM - port eloquent
 Add basic filters  in quorra
 filters not disabled in testing env?
 environment detection -> use environment provided in the console if any
+cutom errors
 
 NB
 --
 Remove unnecessary dev dep from positron and quarra
 Move possible dep from quorra to positron
+default values for parameters is already implemented
 
 
 
@@ -44,5 +43,6 @@ routing
 route match event
 route finish event
 filter classes
+Redirector class
 
 
