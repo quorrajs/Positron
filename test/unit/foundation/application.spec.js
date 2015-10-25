@@ -15,13 +15,11 @@ var os = require('os');
 
 describe('Application', function(){
 
-    describe('application', function(){
-       it('should be a singleton instance of Application constructor', function(done) {
-           application.should.be.an.instanceOf(Application);
-           application.should.be.equal(application2);
-           done();
-       });
-    });
+   it('should be a singleton instance of Application constructor', function(done) {
+       application.should.be.an.instanceOf(Application);
+       application.should.be.equal(application2);
+       done();
+   });
 
     describe('#bindInstallPaths', function() {
         application.bindInstallPaths({
