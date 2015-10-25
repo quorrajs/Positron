@@ -35,12 +35,14 @@
     "utils-merge": "1.0.0",
     "waterline": "^0.10.19",
     "winston": "^0.9.0",
+    "winston-mail": "^0.5.0",
     "xregexp": "git://github.com/slevithan/xregexp.git"
   },
   "devDependencies": {
     "consolidate": "^0.13.1",
     "mocha": "^2.3.1",
     "should": "^7.1.0",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "winston-mongodb": "^1.2.0"
   }
 }
