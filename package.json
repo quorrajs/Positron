@@ -38,7 +38,9 @@
     "xregexp": "git://github.com/slevithan/xregexp.git"
   },
   "devDependencies": {
+    "consolidate": "^0.13.1",
     "mocha": "^2.3.1",
-    "should": "^7.1.0"
+    "should": "^7.1.0",
+    "sinon": "^1.17.2"
   }
 }
