@@ -1,10 +1,10 @@
 Routing things remaining
 ------------------------
 Sub-Domain Routing
-Route Model Binding
+Route Model Binding ------------------------------------------------ done
 Resource route missing method
 Enable HTTP Method Override
-Manage response for HEAD, OPTIONS, etc method in router and error handler
+Manage response for HEAD, OPTIONS, etc method in router and error handler      ------------- done for head and options
 
 Input - body parser -> consider using skipper instead of body-parser
 
