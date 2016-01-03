@@ -3,14 +3,14 @@ Routing things remaining
 Sub-Domain Routing
 Route Model Binding ------------------------------------------------ done
 Resource route missing method
-Enable HTTP Method Override
+Enable HTTP Method Override ---------------------------------------- done
 Manage response for HEAD, OPTIONS, etc method in router and error handler      ------------- done for head and options
 
 Input - body parser -> consider using skipper instead of body-parser
 
 Things to implement
 -------------------
-Localization
+Localization -------------------------------------------------------- done
 Mails
 Queues
 Security
