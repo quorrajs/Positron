@@ -21,6 +21,7 @@
     "longjohn": "^0.2.4",
     "methods": "^1.1.0",
     "node-session": "0.0.1-alpha.2",
+    "nodemailer": "^1.11.0",
     "on-finished": "^2.2.0",
     "on-headers": "^1.0.0",
     "ouch": "^0.2.0-beta",
