@@ -124,6 +124,8 @@ describe('Application', function(){
                 process.env.NODE_ENV.should.be.equal('staging');
                 application.env.should.be.equal('staging');
 
+                resetEnvironment();
+
                 done();
             }
         );
@@ -136,6 +138,8 @@ describe('Application', function(){
 
             application.environment().should.be.eql('development');
 
+            resetEnvironment();
+
             done();
         });
 
@@ -144,8 +148,15 @@ describe('Application', function(){
             application.environment('development', 'production').should.be.ok();
             application.environment('production').should.not.be.ok();
 
+            application.environment().should.be.eql('development');
+
+            resetEnvironment();
+
             done();
         });
     });
 
+    function resetEnvironment() {
+        delete process.env.NODE_ENV;
+    }
 });
