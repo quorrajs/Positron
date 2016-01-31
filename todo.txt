@@ -1,23 +1,20 @@
 Routing things remaining
 ------------------------
-Sub-Domain Routing
 Route Model Binding ------------------------------------------------ done
-Resource route missing method
+Resource route missing method -------------------------------------- done
 Enable HTTP Method Override ---------------------------------------- done
 Manage response for HEAD, OPTIONS, etc method in router and error handler      ------------- done for head and options
-
-Input - body parser -> consider using skipper instead of body-parser
 
 Things to implement
 -------------------
 Localization -------------------------------------------------------- done
-Mails
-Queues
-Security
-SSH
+Mails --------------------------------------------------------------- done
+
+Security ------------------------------------------------------------ passport is already there
+SSH ----------------------------------------------------------------- next version
 Cli
 Task runner integration
-Encryption and hashing
+Encryption ----------------------------------------------------------- done
 
 Consider
 ------------------
@@ -26,6 +23,8 @@ Add basic filters  in quorra
 filters not disabled in testing env?
 environment detection -> use environment provided in the console if any
 cutom errors
+Input - body parser -> consider using skipper instead of body-parser
+pretend mail mode
 
 NB
 --
@@ -44,5 +43,6 @@ route match event
 route finish event
 filter classes
 Redirector class
-
+Sub-Domain Routing
+Queues  --- looks like there are no unified queing api's available for now, have to create our one.
 
