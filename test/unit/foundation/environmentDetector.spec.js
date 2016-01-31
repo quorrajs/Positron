@@ -46,5 +46,31 @@ describe('environmentDetector', function() {
                 done();
             }
         );
+
+        it('should return value of process.env.NODE_ENV if it already set', function(done) {
+            process.env.NODE_ENV = 'local';
+
+            environmentDetector.detect(function(){
+                return 'staging';
+            }).should.be.eql('local');
+
+            done();
+        });
+
+        it('should return value of --env flag if it is set', function(done) {
+            process.argv.push('--env');
+            process.argv.push('development');
+
+            process.env.NODE_ENV = 'local';
+
+            environmentDetector.detect(function(){
+                return 'staging';
+            }).should.be.eql('development');
+
+            process.argv.pop();
+            process.argv.pop();
+
+            done();
+        })
     });
 });

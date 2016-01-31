@@ -115,6 +115,8 @@ describe('Application', function(){
     });
 
     describe('#detectEnvironment', function(){
+        resetEnvironment();
+
         it('should assign detected environment to both process.env.NODE_ENV and env property of application class and ' +
             'return detected environment',
             function(done){
