@@ -1,6 +1,6 @@
 {
   "name": "positron",
-  "version": "1.0.0-alpha",
+  "version": "1.0.0-alpha.2",
   "scripts": {},
   "dependencies": {
     "accepts": "1.0.1",
@@ -30,13 +30,14 @@
     "proxy-addr": "^1.0.7",
     "qs": "^2.4.1",
     "range-parser": "1.0.0",
-    "reflection-js": "^0.1.6",
+    "reflection-js": "git+https://github.com/harishanchu/ReflectionJS.git#a05939eacbd7813378c1194109b0af2b3aa309b9",
     "sails-disk": "^0.10.7",
     "send": "^0.12.2",
     "serve-static": "^1.9.2",
     "stack-trace": "0.0.9",
     "type-is": "1.1.0",
     "utils-merge": "1.0.0",
+    "vary": "^1.0.0",
     "waterline": "^0.10.19",
     "winston": "^0.9.0",
     "winston-mail": "^0.5.0",
