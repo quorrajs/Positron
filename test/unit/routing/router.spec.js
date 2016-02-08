@@ -1,10 +1,3 @@
-/**
- * router.spec.js
- *
- * @author: Harish Anchu <harishanchu@gmail.com>
- * @copyright 2015, Harish Anchu. All rights reserved.
- * @license Licensed under MIT
- */
 
 var Router = require('../../../lib/routing/Router');
 var http = require('http');

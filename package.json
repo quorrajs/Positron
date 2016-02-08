@@ -1,6 +1,6 @@
 {
   "name": "positron",
-  "version": "0.0.1-alpha",
+  "version": "1.0.0-alpha",
   "scripts": {},
   "dependencies": {
     "accepts": "1.0.1",
@@ -48,5 +48,31 @@
     "should": "^7.1.0",
     "sinon": "^1.17.2",
     "winston-mongodb": "^1.2.0"
-  }
+  },
+  "description": "The QuorraJS Framework",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/quorrajs/Positron"
+  },
+  "keywords": [
+    "quorra",
+    "quorra.js",
+    "quorrajs",
+    "mvc",
+    "framework",
+    "rest",
+    "api",
+    "restful",
+    "web"
+  ],
+  "author": "Harish Anchu <harishanchu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/quorrajs/Positron/issues"
+  },
+  "homepage": "https://github.com/quorrajs/Positron"
 }

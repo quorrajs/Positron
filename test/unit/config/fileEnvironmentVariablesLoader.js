@@ -1,10 +1,3 @@
-/**
- * fileEnvironmentVariablesLoader.spec.js
- *
- * @author: Harish Anchu <harishanchu@gmail.com>
- * @copyright 2015, Harish Anchu. All rights reserved.
- * @license Licensed under MIT
- */
 
 describe('FileEnvironmentVariablesLoader', function(){
     var FileEnvironmentVariablesLoader = require('../../../lib/config/FileEnvironmentVariablesLoader');

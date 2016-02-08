@@ -1,10 +1,4 @@
-/**
- * viewFactory.spec.js
- *
- * @author: Harish Anchu <harishanchu@gmail.com>
- * @copyright 2015, Harish Anchu. All rights reserved.
- * @license Licensed under MIT
- */
+
 var ViewFactory = require('../../../lib/view/ViewFactory');
 var View = require('../../../lib/view/View');
 var tmplEngine = require('../../support/tmpl');
