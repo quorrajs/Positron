@@ -13,6 +13,20 @@ var _ = require('lodash');
 
 const HTTP_METHODS = require('methods');
 
+var server;
+
+before(function(done){
+    server = http.createServer(function(request, response){
+        response.end();
+    }).listen(3001, 'localhost');
+    server.on("listening", function () { done(); });
+});
+
+
+after(function(){
+    server.close();
+});
+
 describe('Router', function() {
     describe('#constructor', function() {
         it('should return an instance of Router when initialized', function(done) {
@@ -34,7 +48,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -62,7 +76,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -85,7 +99,7 @@ describe('Router', function() {
             routerInstance.get('/foo/bar', {domain:'users.localhost', uses:function(req, res){res.end('get hello');}});
 
             var options = {
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -113,7 +127,7 @@ describe('Router', function() {
             }});
 
             var options = {
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -138,7 +152,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'POST'
             };
@@ -164,7 +178,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/parameter/bar',
                 method: 'GET'
             };
@@ -186,7 +200,7 @@ describe('Router', function() {
             routerInstance.get('/foo/optionalParameter/{bar?}', function(req, res, bar){res.end(bar);});
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/optionalParameter',
                 method: 'GET'
             };
@@ -215,7 +229,7 @@ describe('Router', function() {
 
                     var options = {
                         host: 'localhost',
-                        port: 80,
+                        port: 3001,
                         path: '/foo/routeParameter',
                         method: 'GET'
                     };
@@ -232,7 +246,7 @@ describe('Router', function() {
                 function(callback){
                     var options = {
                         host: 'localhost',
-                        port: 80,
+                        port: 3001,
                         path: '/foo/routeParameter/optionalRouteParameter',
                         method: 'GET'
                     };
@@ -256,7 +270,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -278,7 +292,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'GET'
             };
@@ -310,7 +324,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'OPTIONS'
             };
@@ -345,7 +359,7 @@ describe('Router', function() {
 
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/foo/bar',
                 method: 'HEAD'
             };
@@ -367,7 +381,7 @@ describe('Router', function() {
             routerInstance.get('/{optionalRouteParameter?}', {as: 'foo', uses: function(req, res){res.end('hello');}});
             var options = {
                 host: 'localhost',
-                port: 80,
+                port: 3001,
                 path: '/routeParameter',
                 method: 'GET'
             };
@@ -379,7 +393,7 @@ describe('Router', function() {
 
                         options = {
                             host: 'localhost',
-                            port: 80,
+                            port: 3001,
                             path: '/',
                             method: 'GET'
                         };
@@ -416,7 +430,7 @@ describe('Router', function() {
 
                 var options = {
                     host: 'localhost',
-                    port: 80,
+                    port: 3001,
                     path: '/foo',
                     method: method.toUpperCase()
                 };
@@ -446,7 +460,7 @@ describe('Router', function() {
 
                var options = {
                    host: 'localhost',
-                   port: 80,
+                   port: 3001,
                    path: '/foo',
                    method: method
                };
