@@ -336,14 +336,16 @@ describe('Router', function() {
                     return res;
                 };
                 res.header = function(h, v){
-                    header = h; value =v;
+                    header = h; value = v.split(',');
 
                     return res;
                 };
 
                 res.send = function(){
                     header.should.equal('Allow');
-                    value.should.equal('GET,HEAD,POST');
+                    value.should.containEql('GET');
+                    value.should.containEql('HEAD');
+                    value.should.containEql('POST');
 
                     done();
                 };
@@ -867,6 +869,10 @@ describe('Router', function() {
     }
 
     function getRequest(options, CB) {
+        options.headers = options.headers || {};
+
+        options. headers = { 'Connection':'Close' };
+
         var request = http.request(options, function(response){
             request.__proto__ = requestProto;
             request.headers = request._headers;
