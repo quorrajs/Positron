@@ -58,24 +58,29 @@ describe('Application', function(){
 
         application.dispatch();
 
-        it('should call callFilter method of filter if application is down for maintenance', function(done) {
-            application.__filter.callFilter.calledWith('positron.app.down').should.be.ok();
-            done();
-        });
+        setTimeout(function(){
+            it('should call callFilter method of filter if application is down for maintenance', function(done) {
+                application.__filter.callFilter.calledWith('positron.app.down').should.be.ok();
+                done();
+            });
 
-        fs.unlinkSync(filepath);
+            fs.unlinkSync(filepath);
 
-        sinon.spy(application.router, 'dispatch');
+            sinon.spy(application.router, 'dispatch');
 
-        var req = {};
-        var res = {};
+            var req = {};
+            var res = {};
 
-        application.dispatch(req, res);
+            application.dispatch(req, res);
 
-        it('should call dispatch method of the router if application is not down for maintenance', function(done) {
-            application.router.dispatch.calledWith(req, res).should.be.ok();
-            done();
-        });
+            setTimeout(function(){
+                it('should call dispatch method of the router if application is not down for maintenance', function(done) {
+                    application.router.dispatch.calledWith(req, res).should.be.ok();
+                    done();
+                });
+            }, 10)
+
+        }, 10);
     });
 
     describe('#down', function(){
