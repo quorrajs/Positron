@@ -297,10 +297,6 @@ describe('Filter', function() {
        })
     });
 
-    describe('#findPatternFilters', function() {
-
-    });
-
     // @covers #explodeFilters, #parseFilter #explodeArrayFilters
     describe('#parseFilters', function() {
         it('should parse filter string in different formats to a object with filters string as key ' +
