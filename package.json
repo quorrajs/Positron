@@ -53,6 +53,7 @@
   "devDependencies": {
     "consolidate": "~0.13.1",
     "mocha": "~2.3.1",
+    "nodemailer-stub-transport": "^1.0.0",
     "should": "~7.1.0",
     "sinon": "~1.17.2",
     "winston-mongodb": "~1.2.0"
