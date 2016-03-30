@@ -80,7 +80,7 @@ describe('ViewFactory', function() {
                 var view = new ViewFactory(app, app.config);
 
                 view.render('something', {}, function(err, str){
-                    err.should.be.ok;
+                    err.should.be.ok();
                     err.message.should.equal('No default engine was specified and no extension was provided.');
                     done();
                 });
@@ -94,7 +94,7 @@ describe('ViewFactory', function() {
                 app.config.defaultEngine = 'tmpl';
 
                 view.render('something', {}, function(err, str){
-                    err.should.be.ok;
+                    err.should.be.ok();
                     err.message.should.equal('Failed to lookup view "something.tmpl" in views directory "'+
                     path.resolve(__dirname + '/../../fixtures/quorra/resources/views')+'"');
                     done();
