@@ -27,7 +27,7 @@
     "lodash": "~3.1.0",
     "longjohn": "~0.2.4",
     "methods": "~1.1.0",
-    "node-session": "1.0.0-beta",
+    "node-session": "^1.1.1-beta",
     "node-uuid": "~1.4.7",
     "nodemailer": "~1.11.0",
     "on-finished": "~2.2.0",
