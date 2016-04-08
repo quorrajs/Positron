@@ -26,9 +26,8 @@ describe('FileLoader', function(){
 
         it('should override and return default configuration with environment specific configuration based on ' +
         'environment and group specified', function(done){
-            appConfig.debug = false;
-            fileLoader.load('production', 'app').should.eql(appConfig);
-            appConfig.debug = true;
+            fileLoader.load('', 'app').debug.should.be.eql(true);
+            fileLoader.load('production', 'app').debug.should.be.eql(false);
             done();
         });
 
