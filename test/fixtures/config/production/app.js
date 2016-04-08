@@ -1,6 +1,6 @@
 
 var config = {
-    'debug': true
+    'debug': false
 };
 
 module.exports = config;

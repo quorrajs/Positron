@@ -263,7 +263,7 @@ describe('Router', function() {
             ], function(err){ if(!err) { done(); }});
         });
 
-        it('should throw 404 when routes don\'t match non matching paths with leading optionals', function(done) {
+        it('should call response.abort with 404 error when routes don\'t match non matching paths with leading optionals', function(done) {
             var routerInstance = new Router(getApp(), new Filter());
 
             routerInstance.get('{baz?}', function(req, res){res.end('get hello');});
@@ -276,15 +276,17 @@ describe('Router', function() {
             };
 
             getRequest(options, function(req, res){
-                (function(){
-                    routerInstance.dispatch(req, res);
-                }).should.throw('Not found');
+                res.abort = function(err) {
+                    err.status.should.be.equal(404);
 
-                done();
+                    done();
+                };
+
+                routerInstance.dispatch(req, res);
             });
         });
 
-        it('should throw 404 when routes don\'t match non matching domain', function(done) {
+        it('should call response.abort with 404 error when routes don\'t match non matching domain', function(done) {
             var app = getApp();
             var routerInstance = new Router(app, new Filter());
 
@@ -305,11 +307,13 @@ describe('Router', function() {
                     done();
                 };
 
-                (function(){
-                    routerInstance.dispatch(req, res);
-                }).should.throw('Not found');
+                res.abort = function (err) {
+                    err.status.should.be.equal(404);
 
-                done();
+                    done();
+                };
+
+                routerInstance.dispatch(req, res);
             });
         });
     });
