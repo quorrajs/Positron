@@ -8,6 +8,7 @@ var sinon = require('sinon');
 var async = require('async');
 var should = require('should');
 var Application = require('../../../lib/foundation/Application');
+var path = require('path');
 
 var _ = require('lodash');
 
@@ -741,8 +742,8 @@ describe('Router', function() {
                 });
             });
 
-            route1.getAction()['controller'].should.be.equal('namespace/Controller');
-            route2.getAction()['controller'].should.be.equal('namespace/nested/Controller');
+            route1.getAction()['controller'].should.be.equal(path.join('namespace', 'Controller'));
+            route2.getAction()['controller'].should.be.equal(path.join('namespace', 'nested' , 'Controller'));
 
             done();
         });
