@@ -7,7 +7,7 @@ NodeJS Framework For Web Riders
 
 > **Note:** This repository contains the core code of the QuorraJS framework.
 
-[Documentation](https://quorrajs.org/documentation.html)
+[Documentation](https://quorrajs.org/docs/v1)
 
 ## License
 
