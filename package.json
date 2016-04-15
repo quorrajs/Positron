@@ -38,7 +38,6 @@
     "qs": "~2.4.1",
     "range-parser": "1.0.0",
     "reflectionjs": "~1.0.0",
-    "sails-disk": "~0.10.7",
     "send": "~0.12.2",
     "serve-static": "~1.9.2",
     "stack-trace": "0.0.9",
