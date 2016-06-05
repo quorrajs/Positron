@@ -51,7 +51,7 @@ describe('Application', function(){
      * @covers #isDownForMaintenance, #handle
      */
     describe('#dispatch', function(){
-        sinon.spy(application.__filter, 'callFilter');
+        sinon.spy(application.filter, 'callFilter');
 
         var filepath = __dirname + '/../../fixtures/quorra/app/storage/meta/down';
         fs.closeSync(fs.openSync(filepath, 'w'));
@@ -60,7 +60,7 @@ describe('Application', function(){
 
         process.nextTick(function(){
             it('should call callFilter method of filter if application is down for maintenance', function(done) {
-                application.__filter.callFilter.calledWith('positron.app.down').should.be.ok();
+                application.filter.callFilter.calledWith('positron.app.down').should.be.ok();
                 done();
             });
 
@@ -85,13 +85,13 @@ describe('Application', function(){
 
     describe('#down', function(){
          it('should register callback with filter  class', function(done){
-             sinon.spy(application.__filter, 'register');
+             sinon.spy(application.filter, 'register');
 
              var callback = function(){};
 
              application.down(callback);
 
-            application.__filter.register.calledWith('positron.app.down', callback).should.be.ok();
+            application.filter.register.calledWith('positron.app.down', callback).should.be.ok();
             done();
          });
     });

@@ -42,7 +42,9 @@ describe('Mailer', function () {
         var transport = nodemailer.createTransport(stubTransport());
         var app =  getApp();
         var viewFactory = new ViewFactory(app, app.config);
-        var mailer = new Mailer(viewFactory, transport);
+        var mailer = new Mailer(transport);
+
+        mailer.setViewService(viewFactory);
 
         var view;
         var data = { user: 'tron' };
