@@ -1,15 +1,15 @@
 var StackedHttpKernel = require('../../../lib/stack/StackedHttpKernel');
 
 describe('StackedHttpKernel', function () {
-   describe('#constructor', function () {
-      it('should return an instance of StackedHttpKernel when initialized', function (done) {
-          var stack = new StackedHttpKernel();
+    describe('#constructor', function () {
+        it('should return an instance of StackedHttpKernel when initialized', function (done) {
+            var stack = new StackedHttpKernel();
 
-          stack.should.be.an.instanceOf(StackedHttpKernel);
+            stack.should.be.an.instanceOf(StackedHttpKernel);
 
-          done();
-      });
-   });
+            done();
+        });
+    });
 
     describe('#handle', function () {
         it('should call handle method of app instance with passed request and response arguments', function (done) {

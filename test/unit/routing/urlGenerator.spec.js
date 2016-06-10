@@ -12,26 +12,46 @@ describe('UrlGenerator', function () {
 
     var routerInstance = new Router(app, new Filter());
 
-    routerInstance.get('/foo/bar', {as: 'foo', uses: function(req, res){res.end('hello');}});
-    routerInstance.post('/foo/bar', {as: 'bar', uses: function(req, res){res.end('hello');}});
-    routerInstance.get('/foo/baz', {domain: 'foo.com', as: 'baz', uses: function(req, res){res.end('hello');}});
-    routerInstance.get('foo/bar/åαф/{baz}', {as: 'foobarbaz', uses: function(req, res){res.end('hello');}});
-    routerInstance.get('foo/bar#derp', {as: 'fragment', uses: function(req, res){res.end('hello');}});
+    routerInstance.get('/foo/bar', {
+        as: 'foo', uses: function (req, res) {
+            res.end('hello');
+        }
+    });
+    routerInstance.post('/foo/bar', {
+        as: 'bar', uses: function (req, res) {
+            res.end('hello');
+        }
+    });
+    routerInstance.get('/foo/baz', {
+        domain: 'foo.com', as: 'baz', uses: function (req, res) {
+            res.end('hello');
+        }
+    });
+    routerInstance.get('foo/bar/åαф/{baz}', {
+        as: 'foobarbaz', uses: function (req, res) {
+            res.end('hello');
+        }
+    });
+    routerInstance.get('foo/bar#derp', {
+        as: 'fragment', uses: function (req, res) {
+            res.end('hello');
+        }
+    });
     routerInstance.get('/foo/pom', 'RouteTestControllerDispatchStub@foo');
     routerInstance.get('/foo/namespaced/controller/route', 'controllers/namespace/FooController@method');
     routerInstance.get('/foo/namespaced2/controller/route', 'newRootNamespace/namespace/FooController@method');
 
     describe('#constructor', function () {
-       it('should return an instance of UrlGenerator when initialized', function (done) {
-           var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
+        it('should return an instance of UrlGenerator when initialized', function (done) {
+            var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
 
-           urlGen.should.be.an.instanceOf(UrlGenerator);
+            urlGen.should.be.an.instanceOf(UrlGenerator);
 
-           done();
-       });
+            done();
+        });
     });
 
-    describe('#to', function() {
+    describe('#to', function () {
         it('should generate url for supplied path', function (done) {
             var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
 
@@ -84,15 +104,15 @@ describe('UrlGenerator', function () {
 
     describe('#isValidUrl', function () {
         it('should return whether a url is valid or not', function (done) {
-           var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
+            var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
 
-           urlGen.isValidUrl('foo/bar').should.be.false();
-           urlGen.isValidUrl('#foo/bar').should.be.true();
-           urlGen.isValidUrl('http://foo/bar').should.be.true();
-           urlGen.isValidUrl('http/bar').should.be.false();
-           urlGen.isValidUrl('https/:/foo/bar').should.be.false();
+            urlGen.isValidUrl('foo/bar').should.be.false();
+            urlGen.isValidUrl('#foo/bar').should.be.true();
+            urlGen.isValidUrl('http://foo/bar').should.be.true();
+            urlGen.isValidUrl('http/bar').should.be.false();
+            urlGen.isValidUrl('https/:/foo/bar').should.be.false();
 
-           done();
+            done();
         })
     });
 
@@ -100,15 +120,15 @@ describe('UrlGenerator', function () {
         var urlGen = new UrlGenerator(routerInstance.getRoutes(), app);
         it('should return the url to the specified named root', function (done) {
 
-           urlGen.route('foo').should.be.eql('http://localhost/foo/bar');
-           urlGen.route('baz').should.be.eql('http://foo.com/foo/baz');
-           urlGen.route('baz').should.be.eql('http://foo.com/foo/baz');
-           urlGen.route('foobarbaz', {'baz': 'åαф'}).should.be.eql('http://localhost/foo/bar/%C3%A5%CE%B1%D1%84/%C3%A5%CE%B1%D1%84');
-           urlGen.route('foo', {'foo': 'bar'}, false).should.be.eql('/foo/bar?foo=bar');
-           urlGen.route('fragment', {}, false).should.be.eql('/foo/bar#derp');
-           urlGen.route('fragment', {'foo': 'bar'}, false).should.be.eql('/foo/bar?foo=bar#derp');
+            urlGen.route('foo').should.be.eql('http://localhost/foo/bar');
+            urlGen.route('baz').should.be.eql('http://foo.com/foo/baz');
+            urlGen.route('baz').should.be.eql('http://foo.com/foo/baz');
+            urlGen.route('foobarbaz', {'baz': 'åαф'}).should.be.eql('http://localhost/foo/bar/%C3%A5%CE%B1%D1%84/%C3%A5%CE%B1%D1%84');
+            urlGen.route('foo', {'foo': 'bar'}, false).should.be.eql('/foo/bar?foo=bar');
+            urlGen.route('fragment', {}, false).should.be.eql('/foo/bar#derp');
+            urlGen.route('fragment', {'foo': 'bar'}, false).should.be.eql('/foo/bar?foo=bar#derp');
 
-           done();
+            done();
         });
     });
 
@@ -142,11 +162,12 @@ describe('UrlGenerator', function () {
     function getApp() {
         var app = new Application();
         app.config = {
-            get: function(item) {
+            get: function (item) {
                 var value = {};
 
                 switch (item) {
-                    case 'app': return { url: 'http://localhost' };
+                    case 'app':
+                        return {url: 'http://localhost'};
                 }
 
                 return value;

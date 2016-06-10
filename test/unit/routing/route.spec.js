@@ -11,13 +11,15 @@ var Filter = require('../../../lib/routing/Filter');
 describe('Route', function () {
     describe('#constructor', function () {
         it('should return an instance of Route when initialized', function () {
-            var route = new Route('GET', '/', function(){}, {});
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             route.should.be.an.instanceOf(Route);
         });
 
-        it('should parse passed action input and set route action', function(done) {
-            var action = function(){};
+        it('should parse passed action input and set route action', function (done) {
+            var action = function () {
+            };
             var route = new Route('GET', '/', action, {});
 
             (route.getAction())['uses'].should.be.equal(action);
@@ -29,31 +31,38 @@ describe('Route', function () {
             done();
         });
 
-        it('should set route uri', function(done) {
+        it('should set route uri', function (done) {
             var uri = '/hello';
-            var route = new Route('GET', uri, function(){}, {});
+            var route = new Route('GET', uri, function () {
+            }, {});
 
             route.getUri().should.be.equal(uri);
 
             done();
         });
 
-        it('should set route uri with prefix if action contains prefix', function(done) {
+        it('should set route uri with prefix if action contains prefix', function (done) {
             var uri = '/hello';
             var prefix = 'admin';
-            var route = new Route('GET', uri, {uses:function(){}, prefix: prefix}, {});
+            var route = new Route('GET', uri, {
+                uses: function () {
+                }, prefix: prefix
+            }, {});
 
-            route.getUri().should.be.equal(prefix+uri);
+            route.getUri().should.be.equal(prefix + uri);
 
             done();
         });
     });
 
-    describe('#domain', function() {
+    describe('#domain', function () {
         var domain = "foo";
 
-        it('should return domain if passed action input contains domain', function(done) {
-            var route = new Route('GET', '/', { uses:function(){}, domain: domain}, {});
+        it('should return domain if passed action input contains domain', function (done) {
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, domain: domain
+            }, {});
 
             route.domain().should.be.equal(domain);
 
@@ -61,57 +70,60 @@ describe('Route', function () {
         });
     });
 
-    describe('#run', function() {
-       it('should execute route action with request, response objects and non null route parameters', function(done) {
-           var action = function(req, res, param1, param2, param3) {
-               req.should.be.equal(req);
-               res.should.be.equal(res);
-               param1.should.be.equal(req.routeParameters.param1);
-               param2.should.be.equal(req.routeParameters.param2);
-               should(param3).be.undefined();
+    describe('#run', function () {
+        it('should execute route action with request, response objects and non null route parameters', function (done) {
+            var action = function (req, res, param1, param2, param3) {
+                req.should.be.equal(req);
+                res.should.be.equal(res);
+                param1.should.be.equal(req.routeParameters.param1);
+                param2.should.be.equal(req.routeParameters.param2);
+                should(param3).be.undefined();
 
-               done();
-           };
+                done();
+            };
 
-           var route = new Route('GET', '/', action, {});
-           var req = {
-               routeParameters: {
-                   param1: 'foo',
-                   param2: 'bar',
-                   param3: null
-               }
-           };
-           var res = {};
+            var route = new Route('GET', '/', action, {});
+            var req = {
+                routeParameters: {
+                    param1: 'foo',
+                    param2: 'bar',
+                    param3: null
+                }
+            };
+            var res = {};
 
-           route.run(req, res);
-       })
+            route.run(req, res);
+        })
     });
 
     describe('#where', function () {
-       it('should set passed where conditions on route', function(done) {
-           var route = new Route('GET', '/', function () {}, {});
+        it('should set passed where conditions on route', function (done) {
+            var route = new Route('GET', '/', function () {
+            }, {});
 
-           route.where('foo', 'bar');
-           route.__wheres['foo'].should.equal('bar');
+            route.where('foo', 'bar');
+            route.__wheres['foo'].should.equal('bar');
 
-           route.where({'foo': 'bar', 'test': 'hello'});
-           route.__wheres['test'].should.equal('hello');
-           route.__wheres['foo'].should.equal('bar');
+            route.where({'foo': 'bar', 'test': 'hello'});
+            route.__wheres['test'].should.equal('hello');
+            route.__wheres['foo'].should.equal('bar');
 
-           done();
-       });
+            done();
+        });
     });
 
-    describe('#methods', function() {
+    describe('#methods', function () {
         it('should return methods supported by the route', function (done) {
-            var route = new Route('GET', '/', function () {}, {});
+            var route = new Route('GET', '/', function () {
+            }, {});
             var methods = route.methods();
 
             methods.should.containEql('GET');
             methods.should.containEql('HEAD');
             methods.should.not.containEql('POST');
 
-            route = new Route(['POST', 'PUT'], '/', function () {}, {});
+            route = new Route(['POST', 'PUT'], '/', function () {
+            }, {});
             methods = route.methods();
 
             methods.should.containEql('POST');
@@ -124,7 +136,10 @@ describe('Route', function () {
 
     describe('#httpOnly', function () {
         it('should return true if route action input parameter\'s http attribute set to true', function (done) {
-            var route = new Route('GET', '/', {uses:function () {}, http: true}, {});
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, http: true
+            }, {});
 
             should(route.httpOnly()).be.true();
 
@@ -132,11 +147,17 @@ describe('Route', function () {
         });
 
         it('should return false if route action input parameter\'s http attribute is not set or set to false ', function (done) {
-            var route = new Route('GET', '/', {uses:function () {}, http: false}, {});
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, http: false
+            }, {});
 
             should(route.httpOnly()).be.false();
 
-            route = new Route('GET', '/', {uses:function () {}}, {});
+            route = new Route('GET', '/', {
+                uses: function () {
+                }
+            }, {});
 
             should(route.httpOnly()).be.false();
 
@@ -146,7 +167,10 @@ describe('Route', function () {
 
     describe('#secure', function () {
         it('should return true if route action input parameter\'s https attribute set to true', function (done) {
-            var route = new Route('GET', '/', {uses:function () {}, https: true}, {});
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, https: true
+            }, {});
 
             should(route.secure()).be.true();
 
@@ -154,11 +178,17 @@ describe('Route', function () {
         });
 
         it('should return false if route action input parameter\'s https attribute is not set or set to false ', function (done) {
-            var route = new Route('GET', '/', {uses:function () {}, https: false}, {});
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, https: false
+            }, {});
 
             should(route.secure()).be.false();
 
-            route = new Route('GET', '/', {uses:function () {}}, {});
+            route = new Route('GET', '/', {
+                uses: function () {
+                }
+            }, {});
 
             should(route.secure()).be.false();
 
@@ -166,11 +196,12 @@ describe('Route', function () {
         });
     });
 
-    describe('#getValidators', function() {
-        it('should return an array with all http validator class instances', function(done) {
-            var route = new Route('GET', '/', function() {}, {});
+    describe('#getValidators', function () {
+        it('should return an array with all http validator class instances', function (done) {
+            var route = new Route('GET', '/', function () {
+            }, {});
 
-            var validators  = route.getValidators();
+            var validators = route.getValidators();
 
             var validatorsClasses = [MethodValidator, SchemeValidator, HostValidator, UriValidator];
 
@@ -184,25 +215,28 @@ describe('Route', function () {
 
     describe('#matches', function () {
         it('should return true if passed request matches the route', function (done) {
-            var route = new Route('GET', '/', function() {}, {});
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             should(route.matches({
                 path: '/',
                 method: 'get'
             })).be.true();
 
-           route = new Route('POST', '/foo', function() {}, {});
+            route = new Route('POST', '/foo', function () {
+            }, {});
 
-           should(route.matches({
-               path: '/foo',
-               method: 'POST'
-           })).be.true();
+            should(route.matches({
+                path: '/foo',
+                method: 'POST'
+            })).be.true();
 
-           done();
+            done();
         });
 
         it('should return false if passed request do not match the route', function (done) {
-            var route = new Route('GET', '/', function() {}, {});
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             should(route.matches({
                 path: '/',
@@ -218,7 +252,8 @@ describe('Route', function () {
         });
 
         it('should skip method validation if it is set to false', function (done) {
-            var route = new Route('GET', '/', function() {}, {});
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             should(route.matches({
                 path: '/',
@@ -234,7 +269,10 @@ describe('Route', function () {
         });
 
         it('should validate host if host is set in route', function (done) {
-            var route = new Route('GET', '/', {uses: function() {}, domain: 'foo'}, {});
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, domain: 'foo'
+            }, {});
 
             var xregexp = require('xregexp');
 
@@ -259,9 +297,10 @@ describe('Route', function () {
         });
     });
 
-    describe('#bind', function() {
-        it('should call __compileRoute and bindParameters methods', function(done) {
-            var route = new Route('GET', '/', function() {}, {});
+    describe('#bind', function () {
+        it('should call __compileRoute and bindParameters methods', function (done) {
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             sinon.spy(route, '__compileRoute');
             sinon.spy(route, 'bindParameters');
@@ -279,77 +318,86 @@ describe('Route', function () {
     });
 
     //@covers matchToKeys
-    describe('#bindParameters', function() {
-       it('should resolve path and host parameters from the request and assign to the requests.params object', function(done) {
+    describe('#bindParameters', function () {
+        it('should resolve path and host parameters from the request and assign to the requests.params object', function (done) {
 
-           // path params
-           var route = new Route('GET', '/{foo}', function() {}, {});
-           var request = {
-               path: '/bar',
-               method: 'get'
-           };
+            // path params
+            var route = new Route('GET', '/{foo}', function () {
+            }, {});
+            var request = {
+                path: '/bar',
+                method: 'get'
+            };
 
-           route.bind(request);
+            route.bind(request);
 
-           request.params.foo.should.equal('bar');
+            request.params.foo.should.equal('bar');
 
-           // optional path params
-           route = new Route('GET', '/{foo}/{boom?}', function() {}, {});
-           request = {
-               path: '/bar',
-               method: 'get'
-           };
+            // optional path params
+            route = new Route('GET', '/{foo}/{boom?}', function () {
+            }, {});
+            request = {
+                path: '/bar',
+                method: 'get'
+            };
 
-           route.bind(request);
+            route.bind(request);
 
-           request.params.foo.should.equal('bar');
-           should(request.params.boom).be.undefined();
+            request.params.foo.should.equal('bar');
+            should(request.params.boom).be.undefined();
 
-           request = {
-               path: '/bar/baz',
-               method: 'get'
-           };
+            request = {
+                path: '/bar/baz',
+                method: 'get'
+            };
 
-           route.bind(request);
+            route.bind(request);
 
-           request.params.foo.should.equal('bar');
-           request.params.boom.should.equal('baz');
+            request.params.foo.should.equal('bar');
+            request.params.boom.should.equal('baz');
 
-           // host params
-           route = new Route('GET', '/{foo}', {domain: '{subdomain}.mydomain', uses: function() {}}, {});
+            // host params
+            route = new Route('GET', '/{foo}', {
+                domain: '{subdomain}.mydomain', uses: function () {
+                }
+            }, {});
 
-           request = {
-               path: '/bar',
-               method: 'get',
-               host: 'boom.mydomain'
-           };
+            request = {
+                path: '/bar',
+                method: 'get',
+                host: 'boom.mydomain'
+            };
 
-           route.bind(request);
+            route.bind(request);
 
-           request.params.foo.should.equal('bar');
-           request.params.subdomain.should.equal('boom');
+            request.params.foo.should.equal('bar');
+            request.params.subdomain.should.equal('boom');
 
-           done();
-       });
+            done();
+        });
     });
 
-    describe('#parameterNames', function() {
-       it('should return all route path and host parameter names', function(done) {
-           var route = new Route('GET', '/{foo}/{bar?}', {domain: '{subdomain}.mydomain', uses: function() {}}, {});
+    describe('#parameterNames', function () {
+        it('should return all route path and host parameter names', function (done) {
+            var route = new Route('GET', '/{foo}/{bar?}', {
+                domain: '{subdomain}.mydomain', uses: function () {
+                }
+            }, {});
 
-           var params = route.parameterNames();
+            var params = route.parameterNames();
 
-           params.should.containEql('foo');
-           params.should.containEql('bar');
-           params.should.containEql('subdomain');
+            params.should.containEql('foo');
+            params.should.containEql('bar');
+            params.should.containEql('subdomain');
 
-           done();
-       });
+            done();
+        });
     });
 
-    describe('#getCompiled', function() {
-        it('should return an instance of class CompiledRoute when route is already compiled', function(done) {
-            var route = new Route('GET', '/', function() {}, {});
+    describe('#getCompiled', function () {
+        it('should return an instance of class CompiledRoute when route is already compiled', function (done) {
+            var route = new Route('GET', '/', function () {
+            }, {});
 
             route.bind({
                 path: '/',
@@ -364,14 +412,17 @@ describe('Route', function () {
 
     describe('#beforeFilters', function () {
         it('should call #parseFilters of filter instance with before parameter of action input and return its output' +
-            ' as response', function(done) {
+        ' as response', function (done) {
             var filter = {
-                parseFilters: function() {
+                parseFilters: function () {
                     arguments[0].should.equal('auth');
                     return arguments[0];
                 }
             };
-            var route = new Route('GET', '/', {uses: function() {}, before: 'auth'}, filter);
+            var route = new Route('GET', '/', {
+                uses: function () {
+                }, before: 'auth'
+            }, filter);
 
             route.beforeFilters().should.equal('auth');
 

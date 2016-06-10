@@ -3,9 +3,9 @@ var sinon = require('sinon');
 var should = require('should');
 var Route = require('../../../lib/routing/Route');
 
-describe('Filter', function() {
-    describe('#constructor', function() {
-        it('should return an instance of Filter when initialized', function(done) {
+describe('Filter', function () {
+    describe('#constructor', function () {
+        it('should return an instance of Filter when initialized', function (done) {
             var filter = new Filter();
 
             filter.should.be.an.instanceOf(Filter);
@@ -13,12 +13,15 @@ describe('Filter', function() {
         })
     });
 
-    describe('#callFilter', function() {
-        it('should execute #run with array of registered filter callbacks and arguments passed', function(done) {
+    describe('#callFilter', function () {
+        it('should execute #run with array of registered filter callbacks and arguments passed', function (done) {
             var filter = new Filter();
-            var filterCallback1 = function() {};
-            var filterCallback2 = function() {};
-            var filterCallback3 = function() {};
+            var filterCallback1 = function () {
+            };
+            var filterCallback2 = function () {
+            };
+            var filterCallback3 = function () {
+            };
 
             //var spy = sinon.spy(filter, 'run');
 
@@ -30,22 +33,22 @@ describe('Filter', function() {
             var req = {};
             var res = {};
             var params = ['foo', 'bar'];
-            var callback = function() {
+            var callback = function () {
             };
 
-            filter.run = function(){
-               arguments[0][0].should.equal(filterCallback2);
-               arguments[0][1].should.equal(filterCallback3);
-               arguments[0][2].should.equal(filterCallback1);
-               arguments[1].should.equal(req);
-               arguments[2].should.equal(res);
-               arguments[3].should.equal(callback);
-               arguments[4].should.equal(params);
+            filter.run = function () {
+                arguments[0][0].should.equal(filterCallback2);
+                arguments[0][1].should.equal(filterCallback3);
+                arguments[0][2].should.equal(filterCallback1);
+                arguments[1].should.equal(req);
+                arguments[2].should.equal(res);
+                arguments[3].should.equal(callback);
+                arguments[4].should.equal(params);
 
-               done();
+                done();
             };
 
-            filter.callFilter('myTestFilter',req, res, callback, params);
+            filter.callFilter('myTestFilter', req, res, callback, params);
 
             //filter.run.calledOnce.should.be.ok();
             //filter.run.getCalls(0).args[0].should.be.equal()
@@ -54,15 +57,18 @@ describe('Filter', function() {
     });
 
     // @covers #findPatternFilters #registerPatternFilter
-    describe('#callPatternFilters', function() {
-        it('should call #callRouteFilters with all pattern filters for the request and arguments passed', function(done) {
+    describe('#callPatternFilters', function () {
+        it('should call #callRouteFilters with all pattern filters for the request and arguments passed', function (done) {
             var filter = new Filter();
-            var filterCallback1 = function() {};
-            var filterCallback2 = function() {};
-            var filterCallback3 = function() {};
+            var filterCallback1 = function () {
+            };
+            var filterCallback2 = function () {
+            };
+            var filterCallback3 = function () {
+            };
             var req = {path: '/foo/bar'};
             var res = {};
-            var callback = function() {
+            var callback = function () {
             };
 
             filter.register('myTestFilter', filterCallback1);
@@ -72,7 +78,7 @@ describe('Filter', function() {
             filter.registerPatternFilter('/foo/*', 'myTestFilter');
             filter.registerPatternFilter('/foo/*', 'myTestFilter3');
 
-            filter.callRouteFilters = function() {
+            filter.callRouteFilters = function () {
                 arguments[0].myTestFilter.should.be.an.Array();
                 should(arguments[0].myTestFilter2).be.undefined();
                 arguments[0].myTestFilter3.should.be.an.Array();
@@ -88,20 +94,21 @@ describe('Filter', function() {
         });
     });
 
-    describe('#callAttachedBefores', function() {
-        it('should call #callRouteFilters with filters from the passed route and arguments passed', function(done) {
+    describe('#callAttachedBefores', function () {
+        it('should call #callRouteFilters with filters from the passed route and arguments passed', function (done) {
             var filter = new Filter();
-            var route = new Route(['GET'], '/foo/bar', function(){});
+            var route = new Route(['GET'], '/foo/bar', function () {
+            });
             var req = {};
             var res = {};
-            var callback = function() {
+            var callback = function () {
             };
 
-            route.beforeFilters = function() {
+            route.beforeFilters = function () {
                 return 'before filters returned from route';
             };
 
-            filter.callRouteFilters = function() {
+            filter.callRouteFilters = function () {
                 arguments[0].should.be.equal('before filters returned from route');
                 arguments[1].should.equal(req);
                 arguments[2].should.equal(res);
@@ -114,12 +121,12 @@ describe('Filter', function() {
         });
     });
 
-    describe('#callRouteFilters', function() {
-        it('should execute callback passed when filters object is empty', function(done) {
+    describe('#callRouteFilters', function () {
+        it('should execute callback passed when filters object is empty', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
+            var callback = function () {
                 done();
             };
 
@@ -127,14 +134,14 @@ describe('Filter', function() {
         });
 
         it('should execute #callFilter with route filter name, request, response, next filter method ' +
-        'and filter parameters', function(done) {
+        'and filter parameters', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
+            var callback = function () {
             };
 
-            filter.callFilter = function() {
+            filter.callFilter = function () {
                 arguments[0].should.be.equal('router.filter: myFilter');
                 arguments[1].should.equal(req);
                 arguments[2].should.equal(res);
@@ -147,19 +154,19 @@ describe('Filter', function() {
         });
 
         it('should execute #callFilter for all the passed filters asynchronously with appropriate parameters and ' +
-        'finally execute the passed callback function', function(done) {
+        'finally execute the passed callback function', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
-                if(filterCount === 2) {
+            var callback = function () {
+                if (filterCount === 2) {
                     done();
                 }
             };
             var filterCount = 0;
 
-            filter.callFilter = function() {
-                if(filterCount === 0) {
+            filter.callFilter = function () {
+                if (filterCount === 0) {
                     arguments[0].should.be.equal('router.filter: myFilter');
                     arguments[1].should.equal(req);
                     arguments[2].should.equal(res);
@@ -169,7 +176,7 @@ describe('Filter', function() {
                     filterCount++;
 
                     arguments[3](); // next method
-                } else if(filterCount === 1) {
+                } else if (filterCount === 1) {
                     arguments[0].should.be.equal('router.filter: myFilter2');
                     arguments[1].should.equal(req);
                     arguments[2].should.equal(res);
@@ -186,12 +193,12 @@ describe('Filter', function() {
         });
     });
 
-    describe('#run', function() {
-        it('should execute callback passed when there are filters object is empty', function(done) {
+    describe('#run', function () {
+        it('should execute callback passed when there are filters object is empty', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
+            var callback = function () {
                 done();
             };
 
@@ -199,14 +206,14 @@ describe('Filter', function() {
         });
 
         it('should execute passed filter function with request, response, next filter method ' +
-        'and filter parameters', function(done) {
+        'and filter parameters', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
+            var callback = function () {
             };
 
-            filter.run([function() {
+            filter.run([function () {
                 arguments[0].should.equal(req);
                 arguments[1].should.equal(res);
                 arguments[2].should.be.type('function');
@@ -218,20 +225,20 @@ describe('Filter', function() {
         });
 
         it('should execute all the passed filters asynchronously with appropriate parameters and finally execute the ' +
-        'passed callback function', function(done) {
+        'passed callback function', function (done) {
             var filter = new Filter();
             var req = {};
             var res = {};
-            var callback = function() {
-                if(filterCount === 2) {
+            var callback = function () {
+                if (filterCount === 2) {
                     done();
                 }
             };
             var filterCount = 0;
 
             filter.run([
-                function() {
-                    if(filterCount === 0) {
+                function () {
+                    if (filterCount === 0) {
                         arguments[0].should.equal(req);
                         arguments[1].should.equal(res);
                         arguments[2].should.be.type('function');
@@ -243,8 +250,8 @@ describe('Filter', function() {
                         arguments[2](); // next method
                     }
                 },
-                function() {
-                    if(filterCount === 1) {
+                function () {
+                    if (filterCount === 1) {
                         arguments[0].should.equal(req);
                         arguments[1].should.equal(res);
                         arguments[2].should.be.type('function');
@@ -261,46 +268,49 @@ describe('Filter', function() {
     });
 
     // @covers #register
-    describe('#getFilters', function() {
-       it('should return all matched filters by filter string passed', function(done) {
-           var filter = new Filter();
-           var filterCallback1 = function() {};
-           var filterCallback2 = function() {};
-           var filterCallback3 = function() {};
-           var registeredFilters = [filterCallback1, filterCallback2, filterCallback3];
+    describe('#getFilters', function () {
+        it('should return all matched filters by filter string passed', function (done) {
+            var filter = new Filter();
+            var filterCallback1 = function () {
+            };
+            var filterCallback2 = function () {
+            };
+            var filterCallback3 = function () {
+            };
+            var registeredFilters = [filterCallback1, filterCallback2, filterCallback3];
 
-           // single callback register with priority
-           filter.register('myTestFilter', filterCallback1, 3);
-           // multiple callbacks register with priority
-           filter.register('myTestFilter', [filterCallback2, filterCallback3], 6);
+            // single callback register with priority
+            filter.register('myTestFilter', filterCallback1, 3);
+            // multiple callbacks register with priority
+            filter.register('myTestFilter', [filterCallback2, filterCallback3], 6);
 
-           filter.register('myTestFilter2*', filterCallback2);
+            filter.register('myTestFilter2*', filterCallback2);
 
-           var filters = filter.getFilters('myTestFilter');
+            var filters = filter.getFilters('myTestFilter');
 
-           registeredFilters.indexOf(filters[0]).should.be.above(-1);
-           registeredFilters.indexOf(filters[1]).should.be.above(-1);
-           registeredFilters.indexOf(filters[2]).should.be.above(-1);
+            registeredFilters.indexOf(filters[0]).should.be.above(-1);
+            registeredFilters.indexOf(filters[1]).should.be.above(-1);
+            registeredFilters.indexOf(filters[2]).should.be.above(-1);
 
-           // test false condition
-           filter.getFilters('myTest').should.be.empty();
+            // test false condition
+            filter.getFilters('myTest').should.be.empty();
 
 
-           // test retrieval of wildcard filters
-           filter.getFilters('myTestFilter2').should.be.an.Array().and.have.lengthOf(1);
-           filter.getFilters('myTestFilter2')[0].should.be.equal(filterCallback2);
+            // test retrieval of wildcard filters
+            filter.getFilters('myTestFilter2').should.be.an.Array().and.have.lengthOf(1);
+            filter.getFilters('myTestFilter2')[0].should.be.equal(filterCallback2);
 
-           filter.getFilters('myTestFilter2wildcard').should.be.an.Array().and.have.lengthOf(1);
-           filter.getFilters('myTestFilter2wildcard')[0].should.be.equal(filterCallback2);
+            filter.getFilters('myTestFilter2wildcard').should.be.an.Array().and.have.lengthOf(1);
+            filter.getFilters('myTestFilter2wildcard')[0].should.be.equal(filterCallback2);
 
-           done();
-       })
+            done();
+        })
     });
 
     // @covers #explodeFilters, #parseFilter #explodeArrayFilters
-    describe('#parseFilters', function() {
+    describe('#parseFilters', function () {
         it('should parse filter string in different formats to a object with filters string as key ' +
-        'and filter parameters as value', function(done) {
+        'and filter parameters as value', function (done) {
             var filter = new Filter();
 
             filter.parseFilters('auth|session').should.be.eql({auth: [], session: []});
