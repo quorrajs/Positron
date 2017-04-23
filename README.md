@@ -1,4 +1,4 @@
-#QuorraJS Framework (Kernel)
+# QuorraJS Framework (Kernel)
 
 [![npm version](https://img.shields.io/npm/v/positron.svg)](https://www.npmjs.com/package/positron)
 [![Build Status](https://travis-ci.org/quorrajs/Positron.svg?branch=master)](https://travis-ci.org/quorrajs/Positron)
