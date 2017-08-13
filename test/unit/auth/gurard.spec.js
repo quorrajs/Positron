@@ -24,8 +24,8 @@ describe('Guard', function () {
             };
 
             guard.setUser(user);
-            guard.user(function (user) {
-                user.should.be.eql(user);
+            guard.user(function (usr) {
+                user.should.be.eql(usr);
 
                 done();
             });
