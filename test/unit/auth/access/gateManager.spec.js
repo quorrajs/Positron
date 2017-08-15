@@ -230,7 +230,7 @@ describe('GateManager', function () {
         });
 
         it('should call all registered callbacks in sequence until any of the callbacks return a defined response' +
-            'and that reponse should be returned with the final callback', function (done) {
+        'and that reponse should be returned with the final callback', function (done) {
             var gm = new GateManager();
             var stub1 = sinon.stub();
             var stub2 = sinon.stub();
