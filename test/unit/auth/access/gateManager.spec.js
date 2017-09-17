@@ -203,6 +203,25 @@ describe('GateManager', function () {
         })
     });
 
+
+
+    describe('#getAccessGateForUser', function () {
+        it('should return Gate instance with user resolver callback which returns passed user on execution and ' +
+        'gatManager instance', function (done) {
+            var gm = new GateManager();
+            var user = {};
+            var gate = gm.getAccessGateForUser(user);
+
+            gate.should.be.an.instanceOf(Gate);
+            gate.getGateManager().should.be.equal(gm);
+            (gate.getUserResolver())(function (userResp) {
+                userResp.should.be.equal(user);
+
+                done();
+            });
+        });
+    });
+
     describe('#executeBeforeCallbacks', function () {
         it('should call all registered before  callbacks in sequence and finally call the passed callback', function (done) {
             var gm = new GateManager();

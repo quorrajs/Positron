@@ -133,17 +133,20 @@ describe('Gate', function () {
     });
 
     describe('#forUser', function () {
-        it('should return Gate instance with user resolver callback which returns passed user on execution and ' +
-        'gatManager instance registered on current Gate instance', function (done) {
-            var gm = {};
-            var gate = new Gate('resolver', gm);
+        it('should call gm.getAccessGateForUser with passed single argument', function (done) {
+            var gateResponse = new Gate();
+            var gm = {
+                getAccessGateForUser: sinon.stub()
+            };
             var user = {};
 
+            gm.getAccessGateForUser.withArgs(user).returns(gateResponse);
+
+            var gate = new Gate('resolver', gm);
             var newGate = gate.forUser(user);
 
-            newGate.should.be.an.instanceOf(Gate);
-            newGate.getGateManager().should.be.equal(gm);
-            (newGate.getUserResolver())().should.be.equal(user);
+            gm.getAccessGateForUser.calledWithExactly(user).should.be.ok();
+            newGate.should.be.equal(gateResponse);
 
             done();
         })
@@ -203,7 +206,7 @@ describe('Gate', function () {
                     gm.firstArgumentCorrespondsToPolicy.withArgs(methodArguments).returns(true);
                     gm.getPolicyFor.withArgs(methodArguments[0]).returns(policyInstance);
                     policyInstance.before.withArgs(user, ability, methodArguments).callsArgWith(3, null);
-                    policyInstance[ability].withArgs(user, methodArguments[0]).callsArgWith(2, abilityCBResp);
+                    policyInstance[ability].withArgs(user).callsArgWith(1, abilityCBResp);
 
                     gate.executeAuthorizationCallback(user, ability, methodArguments, function (resp) {
                         gm.getPolicyFor.calledOnce.should.be.ok();
