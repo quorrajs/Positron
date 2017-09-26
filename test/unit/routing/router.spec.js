@@ -918,8 +918,8 @@ describe('Router', function () {
         options.headers = {'Connection': 'Close'};
 
         var request = http.request(options, function (response) {
-            request.__proto__ = requestProto;
             request.headers = request._headers;
+            request.__proto__ = requestProto;
 
             CB(request, response);
         });
